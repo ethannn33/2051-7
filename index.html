@@ -15,24 +15,74 @@
 <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
 
 
-  <title>CodePen - 2051-7</title>
+  <title>CodePen - 2053-7 GA copy</title>
   
   
   
   
 <style>
 body {
-color: green;
-  background-color: lightgreen;
-  background-image: url('https://www.canva.com/learn/wp-content/uploads/2018/11/camera-close-up-dusk-1500590.jpg');">
+  font: 400 1em/1.5 "Neuton";
+  background-image: url("https://moviesfilmsmotionpictures.files.wordpress.com/2012/09/breaking-bad-all-characters.jpg");
+  background-repeat: no-repeat;
+  color: white;
+  text-align: center;
+  margin: 0;
+}
 
+p {
+  text-transform: uppercase;
+  letter-spacing: .5em;
+  display: inline-block;
+  border: 4px double rgba(255, 255, 255, 0.25);
+  border-width: 4px 0;
+  padding: 1.5em 0em;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: 40em;
+  margin: 0 0 0 -20em;
+}
+p span {
+  font: 700 4em/1 "Oswald", sans-serif;
+  letter-spacing: 0;
+  padding: .25em 0 .325em;
+  display: block;
+  margin: 0 auto;
+  text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
+  /* Clip Background Image */
+  background: url(http://f.cl.ly/items/010q3E1u3p2Q0j1L1S1o/animated_text_fill.png) repeat-y;
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* Animate Background Image */
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: aitf 80s linear infinite;
+  /* Activate hardware acceleration for smoother animations */
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+}
+
+/* Animate Background Image */
+@-webkit-keyframes aitf {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+#q1 {
+  position: absolute;
+  left: 28%;
+  top: 70%;
+  width: 100px;
 }
 
 .correct {
   background: green;
 }
 
-.incorrect{
+.incorrect {
   background: red;
 }
 </style>
@@ -45,24 +95,43 @@ color: green;
 </head>
 
 <body translate="no" >
-  <img src="http://toptests.co.uk/wp-content/uploads/2017/02/failed-theory-test.png" alt="Epic Fail" width="400" height="300">
-<h1>Ethan's General Quiz</h1>
+  <div id="timerdiv">
+  Timer: <span id="theTimer">0</span>
+</div>
+<audio id="good_job_snd" controls>
+  <source src="https://seattleacademy.github.io/2052-7/good_job.m4a" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+<button id="good_job">Good Job</button>
+<p>
+  <span>
+   A Breaking Bad Quiz
+  </span>
+  &mdash; Test Your Knowledge &mdash;
+</p>
 <ol>
-  <li>2 + 2 = <input  data-correct="4"/></li>
-  <li>6 / 3 <input  data-correct="2"/></li>
-  <li>What is the square root of 16? <input data-correct="4"/></li>
-    <li>Who is the President? <input data-correct="Trump"/></li>
-   <li>Where do you go to school? <input  data-correct="Seattle Academy"/></li>
-   <li>What grade is Ethan in? <input  data-correct="11"/></li>
-  <li>How long is a class period at SAAS? in hours? <input  data-correct="1 hour"/></li>
-  <li>What building at SAAS is where the math classes are located? <input  data-correct="STREAM"/></li>
-  <li>2 + (10/2) = <input  data-correct="7"/></li>
-  <li>How long is soccer match in minute? <input  data-correct="90"/></li>
+<li>Who runs a large fast food chicken chain? = <input  data-correct="Gus"/></li>
+<li>Which one of thse characters learned highschool chemistry from Heisenburg <input  data-correct="Jessie"/></li>
+<li>Who used to be a cop? <input data-correct="Mike"/></li>
+<li>Who forced his brother to suicide and was a con-artist known as "Slippin' Jimmy"? <input data-correct="Saul"/></li>
+<li>Who got paralyzed after a gunfight with "the Cousins" <input  data-correct="Hank"/></li>
+<li>Who bombed Tuco's base? <input  data-correct="Walter"/></li>
+<li>Who has a habit of shoplifting? <input  data-correct="Marie"/></li>
+<li>Who cheated on her  husband with her boss who is in love with her? <input  data-correct="STREAM"/></li>
+<li>Which famous comdeian plays a role as a con-man for Saul <input  data-correct="Bill Burr"/></li>
+<li>Which character has Cereberal Palsey in the show and real life? <input  data-correct="Walter Jr."/></li>
 </ol>
   
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
   
       <script id="rendered-js" >
+let good_job = document.getElementById("good_job_snd");
+
+function playGoodJob(){
+  good_job.play();
+}
+
+$("#good_job").click(playGoodJob)
 console.clear();
 
 $("input").change(onChange)
@@ -76,6 +145,7 @@ function onChange(evt){
   console.log(correct,response);
   if(correct == response){
    $(this).removeClass('incorrect').addClass('correct');
+    
   } else{
     $(this).removeClass('correct').addClass('incorrect');
   }
